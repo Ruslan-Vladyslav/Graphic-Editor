@@ -7,11 +7,29 @@ using System.Drawing;
 
 namespace Lab5
 {
-    class PointShape : Shape
+    public class PointShape : Shape
     {
-        public override void Show(Graphics graph, Pen pen)
+        private long x, y;
+
+        public override long GetX1 => x;
+        public override long GetY1 => y;
+        public override long GetX2 => 0;
+        public override long GetY2 => 0;
+
+        public override void Set(long x1, long y1, long x2, long y2)
         {
-            graph.FillEllipse(Brushes.Black, xs1 - 1, ys1 - 1, 4, 4);
+            x = x1;
+            y = y1;
+        }
+
+        public override void Show(Graphics g, Pen pen, bool isSolid)
+        {
+            const int radius = 2;
+
+            using (Brush brush = new SolidBrush(Color.Black))
+            {
+                g.FillEllipse(brush, (int)x - radius, (int)y - radius, 2 * radius, 2 * radius);
+            }
         }
     }
 

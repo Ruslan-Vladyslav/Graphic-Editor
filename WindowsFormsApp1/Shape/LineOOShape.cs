@@ -1,4 +1,5 @@
 ﻿
+using Lab5;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
@@ -7,33 +8,31 @@ using System.Drawing;
 
 namespace Lab5
 {
-    class LineOOShape : LineShape
+    class LineOOShape : LineShape, IEllipseDraw
     {
         private const int radius = 7;
+        private IEllipseDraw obj = new EllipseShape();
 
-        public override void Show(Graphics graph, Pen pen)
+
+        public override void Show(Graphics graph, Pen pen, bool isSolid)
         {
-            LineShape mainline = new LineShape();
+            base.Show(graph, pen, isSolid);
 
-            mainline.Set(xs1, ys1, xs2, ys2);
-            mainline.Show(graph, pen);
+            SetEllipse(GetX1 - radius, GetY1 - radius, GetX1 + radius, GetY1 + radius);
+            DrawEllipse(graph, pen, isSolid);
 
-            EllipseShape ellipse1 = new EllipseShape();
-            EllipseShape ellipse2 = new EllipseShape();
-
-            DrawLineCircle(ellipse1, graph, xs1, ys1, pen);
-            DrawLineCircle(ellipse2, graph, xs2, ys2, pen);
+            SetEllipse(GetX2 - radius, GetY2 - radius, GetX2 + radius, GetY2 + radius);
+            DrawEllipse(graph, pen, isSolid);
         }
 
-        private void DrawLineCircle(EllipseShape shape, Graphics g, long x, long y, Pen pen)
+        public void DrawEllipse(Graphics g, Pen pen, bool isSolid)
         {
-            shape.Show(g, pen);
+            obj.DrawEllipse(g, pen, isSolid);
+        }
 
-            using (Brush brush = new SolidBrush(Color.FromArgb(253, 67, 67)))
-            {
-                g.FillEllipse(brush, x - radius, y - radius, 2 * radius, 2 * radius);
-                g.DrawEllipse(Pens.Black, x - radius, y - radius, 2 * radius, 2 * radius);
-            }
+        public void SetEllipse(long x1, long y1, long x2, long y2)
+        {
+            obj.SetEllipse(x1, y1, x2, y2);
         }
     }
 }

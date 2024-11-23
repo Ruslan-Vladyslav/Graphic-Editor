@@ -7,19 +7,35 @@ using System.Drawing;
 
 namespace Lab5
 {
-    class RectShape : Shape
+    public class RectShape : Shape
     {
-        public override void Show(Graphics graph, Pen pen)
+        private long x1, y1, x2, y2;
+
+        public override long GetX1 => x1;
+        public override long GetY1 => y1;
+        public override long GetX2 => x2;
+        public override long GetY2 => y2;
+
+        public override void Set(long x1, long y1, long x2, long y2)
         {
-            if (pen.Color == Color.Black)
+            this.x1 = Math.Min(x1, x2);
+            this.y1 = Math.Min(y1, y2);
+            this.x2 = Math.Max(x1, x2);
+            this.y2 = Math.Max(y1, y2);
+        }
+
+        public override void Show(Graphics g, Pen pen, bool isSolid)
+        {
+            if (isSolid)
             {
-                using (Brush brush = new SolidBrush(Color.FromArgb(255, 255, 40)))
+                using (Brush grayBrush = new SolidBrush(Color.LightGray))
                 {
-                    graph.FillRectangle(brush, xs1, ys1, xs2, ys2);
+                    g.FillRectangle(grayBrush, (int)x1, (int)y1, (int)(x2 - x1), (int)(y2 - y1));
                 }
             }
 
-            graph.DrawRectangle(pen, xs1, ys1, xs2, ys2);
+            g.DrawRectangle(pen, (int)x1, (int)y1, (int)(x2 - x1), (int)(y2 - y1));
+            
         }
     }
 }
