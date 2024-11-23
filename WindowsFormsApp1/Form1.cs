@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Drawing;
+using System.Runtime.CompilerServices;
 using System.Windows.Forms;
 using WindowsFormsApp1;
 
@@ -11,12 +13,13 @@ namespace Lab5
         private static readonly MainEditor edit = MainEditor.Instance;
         private readonly MenuHandler handler;
         private readonly FileManager manager;
-        private Editor currentEditor = null;
+        private Shape mainShape;
         private readonly System.Drawing.Image mainIMG = null;
         private DialogForm dialog = null;
 
         private static string FILENAME = "ShapesData.txt";
         private static int counter = 0;
+
         private const int MAXCOUNT = 105;
 
 
@@ -33,8 +36,10 @@ namespace Lab5
 
 
             manager = new FileManager();
-            handler = new MenuHandler(this, edit, currentEditor, mainIMG);
+            handler = new MenuHandler(this, edit, mainIMG);
         }
+
+
 
         private void Form1_Shown(object sender, EventArgs e)
         {
@@ -80,17 +85,17 @@ namespace Lab5
 
         private void Form1_Paint(object sender, PaintEventArgs e)
         {
-            edit.FormPaint(e.Graphics, currentEditor, this);
+            edit.FormPaint(e.Graphics, mainShape, this);
         }
 
         private void Form1_MouseDown(object sender, MouseEventArgs e)
         {
-            edit.FormMouseDown(e, currentEditor, this);
+            edit.FormMouseDown(e, mainShape, this);
         }
 
         private void Form1_MouseUp(object sender, MouseEventArgs e)
         {
-            edit.FormMouseUp(e, currentEditor, this);
+            edit.FormMouseUp(e, mainShape, this);
 
             if (edit != null)
             {
@@ -101,7 +106,7 @@ namespace Lab5
                     manager.WriteObjFile(text, x1, y1, x2, y2, FILENAME);
                     counter++;
 
-                    if (dialog != null && counter < MAXCOUNT)
+                    if (dialog != null && counter <= MAXCOUNT)
                     {
                         DialogAddTable(text, x1, y1, x2, y2);
                     }
@@ -111,7 +116,7 @@ namespace Lab5
 
         private void Form1_MouseMove(object sender, MouseEventArgs e)
         {
-            edit.FormMouseMove(currentEditor, this);
+            edit.FormMouseMove(mainShape, this);
         }
 
         private void toolBtn7_Click(object sender, EventArgs e)
@@ -182,41 +187,41 @@ namespace Lab5
 
         private void pointToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            currentEditor = edit.StartEditor(typeof(PointEditor));
-            SetMenuChecked(currentEditor);
+            mainShape = edit.StartEditor(typeof(PointShape));
+            SetMenuChecked(mainShape);
         }
 
         private void lineToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            currentEditor = edit.StartEditor(typeof(LineEditor));
-            SetMenuChecked(currentEditor);
+            mainShape = edit.StartEditor(typeof(LineShape));
+            SetMenuChecked(mainShape);
         }
 
         private void rectangleToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            currentEditor = edit.StartEditor(typeof(RectEditor));
-            SetMenuChecked(currentEditor);
+            mainShape = edit.StartEditor(typeof(RectShape));
+            SetMenuChecked(mainShape);
         }
 
         private void ellipseToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            currentEditor = edit.StartEditor(typeof(EllipseEditor));
-            SetMenuChecked(currentEditor);
+            mainShape = edit.StartEditor(typeof(EllipseShape));
+            SetMenuChecked(mainShape);
         }
 
         private void lineWithCirclesToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            currentEditor = edit.StartEditor(typeof(LineOOEditor));
-            SetMenuChecked(currentEditor);
+            mainShape = edit.StartEditor(typeof(LineOOShape));
+            SetMenuChecked(mainShape);
         }
 
         private void cubeToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            currentEditor = edit.StartEditor(typeof(CubeEditor));
-            SetMenuChecked(currentEditor);
+            mainShape = edit.StartEditor(typeof(CubeShape));
+            SetMenuChecked(mainShape);
         }
 
-        private void SetMenuChecked(Editor editor)
+        private void SetMenuChecked(Shape shape)
         {
             pointToolStripMenuItem.Checked = false;
             lineToolStripMenuItem.Checked = false;
@@ -232,35 +237,35 @@ namespace Lab5
             drawLineBtn.Checked = false;
             drawCubeBtn.Checked = false;
 
-            if (editor is PointEditor)
+            if (shape is PointShape)
             {
                 pointToolStripMenuItem.Checked = true;
                 toolBtn3.Checked = true;
             }
-            else if (editor is LineEditor)
-            {
-                lineToolStripMenuItem.Checked = true;
-                toolBtn4.Checked = true;
-            }
-            else if (editor is RectEditor)
-            {
-                rectangleToolStripMenuItem.Checked = true;
-                toolBtn5.Checked = true;
-            }
-            else if (editor is EllipseEditor)
-            {
-                ellipseToolStripMenuItem.Checked = true;
-                toolBtn6.Checked = true;
-            }
-            else if (editor is LineOOEditor)
+            else if (shape is LineOOShape)
             {
                 lineWithCirclesToolStripMenuItem.Checked = true;
                 drawLineBtn.Checked = true;
             }
-            else if (editor is CubeEditor)
+            else if (shape is LineShape)
+            {
+                lineToolStripMenuItem.Checked = true;
+                toolBtn4.Checked = true;
+            }
+            else if (shape is CubeShape)
             {
                 cubeToolStripMenuItem.Checked = true;
                 drawCubeBtn.Checked = true;
+            }
+            else if (shape is RectShape)
+            {
+                rectangleToolStripMenuItem.Checked = true;
+                toolBtn5.Checked = true;
+            }
+            else if (shape is EllipseShape)
+            {
+                ellipseToolStripMenuItem.Checked = true;
+                toolBtn6.Checked = true;
             }
         }
 
@@ -271,6 +276,8 @@ namespace Lab5
                 DialogBtn.Checked = true;
 
                 dialog = new DialogForm();
+                //dialog.Owner = this;
+
                 manager.LoadShapesFromFile(DialogAddTable, FILENAME, true);
 
                 dialog.FormClosed += Dialog_FormClosed;

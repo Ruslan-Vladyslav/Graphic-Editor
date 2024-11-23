@@ -59,7 +59,7 @@
             this.infoToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(758, 28);
+            this.menuStrip1.Size = new System.Drawing.Size(702, 30);
             this.menuStrip1.TabIndex = 1;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -70,34 +70,34 @@
             this.printToolStripMenuItem,
             this.exitToolStripMenuItem});
             this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
-            this.fileToolStripMenuItem.Size = new System.Drawing.Size(46, 24);
+            this.fileToolStripMenuItem.Size = new System.Drawing.Size(46, 26);
             this.fileToolStripMenuItem.Text = "File";
             // 
             // saveToolStripMenuItem
             // 
             this.saveToolStripMenuItem.Name = "saveToolStripMenuItem";
-            this.saveToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.saveToolStripMenuItem.Size = new System.Drawing.Size(123, 26);
             this.saveToolStripMenuItem.Text = "Save";
             this.saveToolStripMenuItem.Click += new System.EventHandler(this.saveToolStripMenuItem_Click);
             // 
             // printToolStripMenuItem
             // 
             this.printToolStripMenuItem.Name = "printToolStripMenuItem";
-            this.printToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.printToolStripMenuItem.Size = new System.Drawing.Size(123, 26);
             this.printToolStripMenuItem.Text = "Print";
             this.printToolStripMenuItem.Click += new System.EventHandler(this.printToolStripMenuItem_Click);
             // 
             // exitToolStripMenuItem
             // 
             this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-            this.exitToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.exitToolStripMenuItem.Size = new System.Drawing.Size(123, 26);
             this.exitToolStripMenuItem.Text = "Exit";
             this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
             // 
             // infoToolStripMenuItem
             // 
             this.infoToolStripMenuItem.Name = "infoToolStripMenuItem";
-            this.infoToolStripMenuItem.Size = new System.Drawing.Size(49, 24);
+            this.infoToolStripMenuItem.Size = new System.Drawing.Size(49, 26);
             this.infoToolStripMenuItem.Text = "Info";
             this.infoToolStripMenuItem.Click += new System.EventHandler(this.infoToolStripMenuItem_Click);
             // 
@@ -108,9 +108,9 @@
             this.toolStrip2.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolBtn1,
             this.toolBtn2});
-            this.toolStrip2.Location = new System.Drawing.Point(0, 28);
+            this.toolStrip2.Location = new System.Drawing.Point(0, 30);
             this.toolStrip2.Name = "toolStrip2";
-            this.toolStrip2.Size = new System.Drawing.Size(758, 27);
+            this.toolStrip2.Size = new System.Drawing.Size(702, 31);
             this.toolStrip2.TabIndex = 2;
             this.toolStrip2.Text = "toolStrip1";
             // 
@@ -120,7 +120,7 @@
             this.toolBtn1.Image = global::WindowsFormsApp1.Resource1.save_file_bmp;
             this.toolBtn1.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolBtn1.Name = "toolBtn1";
-            this.toolBtn1.Size = new System.Drawing.Size(29, 24);
+            this.toolBtn1.Size = new System.Drawing.Size(29, 28);
             this.toolBtn1.Text = "Save changes";
             this.toolBtn1.Click += new System.EventHandler(this.toolBtn1_Click);
             // 
@@ -130,7 +130,7 @@
             this.toolBtn2.Image = global::WindowsFormsApp1.Resource1.print_file_bmp;
             this.toolBtn2.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolBtn2.Name = "toolBtn2";
-            this.toolBtn2.Size = new System.Drawing.Size(29, 24);
+            this.toolBtn2.Size = new System.Drawing.Size(29, 28);
             this.toolBtn2.Text = "Print current";
             this.toolBtn2.Click += new System.EventHandler(this.toolBtn2_Click);
             // 
@@ -153,7 +153,7 @@
             dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
             dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
             this.dataGrid.DefaultCellStyle = dataGridViewCellStyle1;
-            this.dataGrid.Location = new System.Drawing.Point(37, 124);
+            this.dataGrid.Location = new System.Drawing.Point(12, 126);
             this.dataGrid.Name = "dataGrid";
             this.dataGrid.ReadOnly = true;
             this.dataGrid.RowHeadersWidth = 51;
@@ -205,13 +205,13 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(758, 423);
+            this.ClientSize = new System.Drawing.Size(702, 423);
             this.Controls.Add(this.dataGrid);
             this.Controls.Add(this.toolStrip2);
             this.Controls.Add(this.menuStrip1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.MaximumSize = new System.Drawing.Size(776, 470);
-            this.MinimumSize = new System.Drawing.Size(776, 470);
+            this.MaximumSize = new System.Drawing.Size(720, 470);
+            this.MinimumSize = new System.Drawing.Size(720, 470);
             this.Name = "DialogForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Objects List";

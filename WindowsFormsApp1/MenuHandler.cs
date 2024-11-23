@@ -12,15 +12,13 @@ namespace Lab5
     {
         private readonly Form1 form;
         private readonly MainEditor objects;
-        private readonly Editor currentEditor;
         private readonly Image mainIMG;
         private readonly PrintDocument printDoc = new PrintDocument();
 
-        public MenuHandler(Form1 form, MainEditor objects, Editor currentEditor, Image mainIMG)
+        public MenuHandler(Form1 form, MainEditor objects, Image mainIMG)
         {
             this.form = form;
             this.objects = objects;
-            this.currentEditor = currentEditor;
             this.mainIMG = mainIMG;
         }
 
@@ -62,7 +60,7 @@ namespace Lab5
                     }
 
                     objects.OnPaint(g);
-                    currentEditor?.OnPaint(form, g);
+                    objects?.OnPaint_Action(form, g);
                 }
 
                 bmp.Save(filePath, System.Drawing.Imaging.ImageFormat.Png);
@@ -95,7 +93,7 @@ namespace Lab5
             }
 
             objects.OnPaint(g);
-            currentEditor?.OnPaint(form, g);
+            objects?.OnPaint_Action(form, g);
 
             e.HasMorePages = false;
         }

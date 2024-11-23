@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.Reflection;
 using System.Windows.Forms;
 
 
@@ -10,7 +11,6 @@ namespace Lab5
     {
         private const int MAX_OBJECTS = 105;
         private static List<Shape> shapeList;
-        private Editor mainEditor;
         private static MainEditor instance;
 
         private long cord1;
@@ -18,6 +18,11 @@ namespace Lab5
         private long cord3;
         private long cord4;
         private string mainShape;
+        private int curShape;
+        
+        private Point startPoint;
+        private Point endPoint;
+        private bool isDrawing;
 
         public MainEditor()
         {
@@ -38,76 +43,169 @@ namespace Lab5
         }
 
 
-
-        public Editor StartEditor(Type type)
+        private Shape CreateShape(int objType)
         {
-            if (type == typeof(PointEditor))
+            switch (objType)
             {
-                mainEditor = new PointEditor(this);
-                mainShape = "Point";
+                case 1: return new PointShape();
+                case 2: return new LineShape();
+                case 3: return new RectShape();
+                case 4: return new EllipseShape();
+                case 5: return new LineOOShape();
+                case 6: return new CubeShape();
+                default: return null;
             }
-            else if (type == typeof(LineEditor))
-            {
-                mainEditor = new LineEditor(this);
-                mainShape = "Line";
-            }
-            else if (type == typeof(RectEditor))
-            {
-                mainEditor = new RectEditor(this);
-                mainShape = "Rectangle";
-            }
-            else if (type == typeof(EllipseEditor))
-            {
-                mainEditor = new EllipseEditor(this);
-                mainShape = "Ellipse";
-            }
-            else if (type == typeof(LineOOEditor))
-            {
-                mainEditor = new LineOOEditor(this);
-                mainShape = "Line-circles";
-            }
-            else if (type == typeof(CubeEditor))
-            {
-                mainEditor = new CubeEditor(this);
-                mainShape = "Cube";
-            }
-
-            return mainEditor;
         }
 
-        public void FormPaint(Graphics e, Editor editor, Form form)
+        public Shape StartEditor(Type type)
+        {
+            if (type == typeof(PointShape))
+            {
+                mainShape = "Point";
+                curShape = 1;
+            }
+            else if (type == typeof(LineShape))
+            {
+                mainShape = "Line";
+                curShape = 2;
+            }
+            else if (type == typeof(RectShape))
+            {
+                mainShape = "Rectangle";
+                curShape = 3;
+            }
+            else if (type == typeof(EllipseShape))
+            {
+                mainShape = "Ellipse";
+                curShape = 4;
+            }
+            else if (type == typeof(LineOOShape))
+            {
+                mainShape = "Line-circles";
+                curShape = 5;
+            }
+            else if (type == typeof(CubeShape))
+            {
+                mainShape = "Cube";
+                curShape = 6;
+            }
+
+            return CreateShape(curShape);
+        }
+
+        private Pen CreatePen()
+        {
+            Pen dashPen = new Pen(Color.FromArgb(0, 43, 255));
+
+            dashPen.DashStyle = System.Drawing.Drawing2D.DashStyle.Dash;
+            dashPen.DashPattern = new float[] { 5, 7 };
+
+            return dashPen;
+        }
+
+        public void FormPaint(Graphics e, Shape editor, Form form)
         {
             OnPaint(e);
-            editor?.OnPaint(form, e);
+
+            if (editor != null) {
+                OnPaint_Action(form, e);
+            }
         }
 
-        public void FormMouseDown(MouseEventArgs e, Editor editor, Form form)
+        public void OnPaint_Action(Form form, Graphics g)
+        {
+            bool isSolid = false;
+
+            if (isDrawing)
+            {
+                endPoint = form.PointToClient(Cursor.Position);
+
+                var mainShape = CreateShape(curShape);
+
+                if (mainShape != null)
+                {
+                    using (Pen pen = CreatePen())
+                    {
+                        mainShape.Set(startPoint.X, startPoint.Y, endPoint.X, endPoint.Y);
+                        mainShape.Show(g, pen, isSolid);
+                    }
+                }
+            }
+        }
+
+        public void OnPaint(Graphics g)
+        {
+            Pen pen = new Pen(Color.Black);
+            bool isSolid = true;
+
+            foreach (var shape in shapeList)
+            {
+                shape.Show(g, pen, isSolid);
+            }
+
+            pen.Dispose();
+        }
+
+        public void FormMouseDown(MouseEventArgs e, Shape editor, Form form)
         {
             if (e.Button == MouseButtons.Left)
             {
                 if (editor != null)
                 {
                     Cursor.Current = Cursors.Hand;
-                    editor.OnLBdown(form);
+                    MouseDown_Action(form);
                 }
             }
         }
+        private void MouseDown_Action(Form form)
+        {
+            isDrawing = true;
 
-        public void FormMouseUp(MouseEventArgs e, Editor editor, Form form)
+            startPoint = form.PointToClient(Cursor.Position);
+            form.Invalidate();
+        }
+
+        public void FormMouseUp(MouseEventArgs e, Shape editor, Form form)
         {
             if (e.Button == MouseButtons.Left)
             {
                 if (editor != null)
                 {
-                    editor.OnLBup(form);
+                    MouseUp_Action(form);
                     Cursor.Current = Cursors.Default;
                 }
             }
         }
 
-        public void FormMouseMove(Editor editor, Form form)
+        private void MouseUp_Action(Form form)
         {
-            editor?.OnMouseMove(form);
+            if (isDrawing)
+            {
+                endPoint = form.PointToClient(Cursor.Position);
+
+                isDrawing = false;
+
+                var mainShape = CreateShape(curShape);
+                mainShape.Set(startPoint.X, startPoint.Y, endPoint.X, endPoint.Y);
+
+                AddObject(mainShape);
+
+                form.Invalidate();
+            }
+        }
+
+        public void FormMouseMove(Shape editor, Form form)
+        {
+            if (isDrawing)
+            {
+                MouseMove_Action(form);
+            }
+        }
+
+        private void MouseMove_Action(Form form)
+        {
+            endPoint = form.PointToClient(Cursor.Position);
+            form.Invalidate();
         }
 
         public void ClearObjects()
@@ -122,18 +220,6 @@ namespace Lab5
                 shapeList.Add(obj);
                 SetCords(obj);
             }
-        }
-
-        public void OnPaint(Graphics g)
-        {
-            Pen pen = new Pen(Color.Black);
-
-            foreach (var shape in shapeList)
-            {
-                shape.Show(g, pen);
-            }
-
-            pen.Dispose();
         }
 
         private void SetCords(Shape obj)

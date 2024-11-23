@@ -1,5 +1,6 @@
 ﻿
 using System;
+using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Printing;
 using System.IO;
@@ -20,6 +21,7 @@ namespace WindowsFormsApp1
         private void InitializeDataGrid()
         {
             dataGrid.ReadOnly = true;
+            dataGrid.MultiSelect = true;
             dataGrid.AllowUserToAddRows = false;
             dataGrid.AllowUserToDeleteRows = false;
             dataGrid.AllowUserToResizeRows = false;

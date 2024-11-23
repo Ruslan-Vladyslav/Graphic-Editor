@@ -1,162 +1,91 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ClassDiagram MajorVersion="1" MinorVersion="1">
-  <Class Name="Lab4.CubeEditor" Collapsed="true">
-    <Position X="8.75" Y="12" Width="1.5" />
-    <TypeIdentifier>
-      <HashCode>AAiAIAAAAAAAAAAAABAAQEAABBAAAAAAEAAAAAAAAAA=</HashCode>
-      <FileName>Editor\CubeEditor.cs</FileName>
-    </TypeIdentifier>
-  </Class>
-  <Class Name="Lab4.Editor" Collapsed="true">
-    <Position X="14.25" Y="10.25" Width="1.5" />
-    <TypeIdentifier>
-      <HashCode>AACAAAAAAABAAAAAAAgAQAAAABAAAAAAEAAAAAAAAAA=</HashCode>
-      <FileName>Editor\Editor.cs</FileName>
-    </TypeIdentifier>
-    <ShowAsAssociation>
-      <Field Name="editor" />
-    </ShowAsAssociation>
-  </Class>
-  <Class Name="Lab4.EllipseEditor" Collapsed="true">
-    <Position X="15.5" Y="12" Width="1.5" />
-    <TypeIdentifier>
-      <HashCode>AACAIAAAAAAAAAAAABAAQEAgABAAAAAAEAAAAAAAAAA=</HashCode>
-      <FileName>Editor\EllipseEditor.cs</FileName>
-    </TypeIdentifier>
-  </Class>
-  <Class Name="Lab4.LineEditor" Collapsed="true">
-    <Position X="17.75" Y="12" Width="1.5" />
-    <TypeIdentifier>
-      <HashCode>AACAAAAAAAAAAAAgABAAQAAAABAAAAAAEAAAAAAAAAA=</HashCode>
-      <FileName>Editor\LineEditor.cs</FileName>
-    </TypeIdentifier>
-  </Class>
-  <Class Name="Lab4.LineOOEditor" Collapsed="true">
-    <Position X="20" Y="12" Width="1.5" />
-    <TypeIdentifier>
-      <HashCode>AACAAAAAAAAAAAAgABAAQAAAEBAAAAAAEAAAAAAAAAA=</HashCode>
-      <FileName>Editor\LineOOEditor.cs</FileName>
-    </TypeIdentifier>
-  </Class>
-  <Class Name="Lab4.PointEditor" Collapsed="true">
-    <Position X="11" Y="12" Width="1.5" />
-    <TypeIdentifier>
-      <HashCode>AACAAAAAAAAAAAAAABAAQAAAABAAAAAAEAAAAAAAAAA=</HashCode>
-      <FileName>Editor\PointEditor.cs</FileName>
-    </TypeIdentifier>
-  </Class>
-  <Class Name="Lab4.RectEditor" Collapsed="true">
-    <Position X="13.25" Y="12" Width="1.5" />
-    <TypeIdentifier>
-      <HashCode>AAiAIAAAAAAAAAAAABAAQEAAABAAAAAAEAAAAAAAAAA=</HashCode>
-      <FileName>Editor\RectEditor.cs</FileName>
-    </TypeIdentifier>
-  </Class>
-  <Class Name="Lab4.Form1" Collapsed="true">
-    <Position X="14.25" Y="7" Width="1.5" />
-    <TypeIdentifier>
-      <HashCode>BQKBEAwMBGoGiAk0AOiEoBAODCgRAIMogwEBxkBQEBA=</HashCode>
-      <FileName>Form1.cs</FileName>
-    </TypeIdentifier>
-    <ShowAsAssociation>
-      <Field Name="edit" />
-      <Field Name="handler" />
-      <Field Name="manager" />
-      <Field Name="currentEditor" />
-      <Field Name="dialog" />
-    </ShowAsAssociation>
-  </Class>
-  <Class Name="Lab4.MainEditor" Collapsed="true">
-    <Position X="14.25" Y="8.5" Width="1.5" />
-    <TypeIdentifier>
-      <HashCode>AACAAEACIAAABEARBAAgAAAABABKAECJQAAABAAAAAQ=</HashCode>
-      <FileName>MainEditor.cs</FileName>
-    </TypeIdentifier>
-    <ShowAsAssociation>
-      <Field Name="mainEditor" />
-    </ShowAsAssociation>
-    <ShowAsCollectionAssociation>
-      <Field Name="shapeList" />
-    </ShowAsCollectionAssociation>
-  </Class>
-  <Class Name="Lab4.MenuHandler" Collapsed="true">
-    <Position X="17.25" Y="7" Width="1.5" />
-    <TypeIdentifier>
-      <HashCode>AQAAAAAAAAAGgAAAQIAAAAAAAQAAEAAAAAAAAAAEAAA=</HashCode>
-      <FileName>MenuHandler.cs</FileName>
-    </TypeIdentifier>
-  </Class>
-  <Class Name="Lab4.Program" Collapsed="true">
-    <Position X="20.5" Y="5.5" Width="1.5" />
-    <Compartments>
-      <Compartment Name="Methods" Collapsed="true" />
-    </Compartments>
-    <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAA=</HashCode>
-      <FileName>Program.cs</FileName>
-    </TypeIdentifier>
-  </Class>
-  <Class Name="Lab4.CubeShape" Collapsed="true">
-    <Position X="2.75" Y="10.25" Width="1.5" />
-    <TypeIdentifier>
-      <HashCode>AACAAAAAAAAAAAAAAAAAAAAABAAEAAAAAAAAAAAAAAA=</HashCode>
-      <FileName>Shape\CubeShape.cs</FileName>
-    </TypeIdentifier>
-  </Class>
-  <Class Name="Lab4.EllipseShape" Collapsed="true">
-    <Position X="7.25" Y="10.25" Width="1.5" />
-    <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAA=</HashCode>
-      <FileName>Shape\EllipseShape.cs</FileName>
-    </TypeIdentifier>
-  </Class>
-  <Class Name="Lab4.LineOOShape" Collapsed="true">
-    <Position X="9.5" Y="10.25" Width="1.5" />
-    <TypeIdentifier>
-      <HashCode>AAAAAAAACAAAAEAAAAAAAAAAAAAEAAAAAAAAAAAAAAA=</HashCode>
-      <FileName>Shape\LineOOShape.cs</FileName>
-    </TypeIdentifier>
-  </Class>
-  <Class Name="Lab4.LineShape" Collapsed="true">
-    <Position X="11.75" Y="10.25" Width="1.5" />
-    <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAA=</HashCode>
-      <FileName>Shape\LineShape.cs</FileName>
-    </TypeIdentifier>
-  </Class>
-  <Class Name="Lab4.PointShape" Collapsed="true">
-    <Position X="0.5" Y="10.25" Width="1.5" />
-    <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAA=</HashCode>
-      <FileName>Shape\PointShape.cs</FileName>
-    </TypeIdentifier>
-  </Class>
-  <Class Name="Lab4.RectShape" Collapsed="true">
-    <Position X="5" Y="10.25" Width="1.5" />
-    <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAA=</HashCode>
-      <FileName>Shape\RectShape.cs</FileName>
-    </TypeIdentifier>
-  </Class>
-  <Class Name="Lab4.Shape" Collapsed="true">
-    <Position X="6" Y="8.5" Width="1.5" />
-    <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAABAAAAAAAAACAAQAEAGAAAAAAAAAAMAA=</HashCode>
-      <FileName>Shape\Shape.cs</FileName>
-    </TypeIdentifier>
-  </Class>
   <Class Name="WindowsFormsApp1.DialogForm" Collapsed="true">
-    <Position X="14.25" Y="5.5" Width="1.5" />
+    <Position X="9.75" Y="0.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>BUCBAAAAgDDQAgAAECCAhAAKAAgAEIAAAwABQAAEABA=</HashCode>
+      <HashCode>BUCBBAAAgTDQAgAAECKAhAAKAAgAEIAAAwABQAAEABA=</HashCode>
       <FileName>DialogForm.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="Lab4.FileManager" Collapsed="true">
-    <Position X="11.25" Y="7" Width="1.5" />
+  <Class Name="Lab5.FileManager" Collapsed="true">
+    <Position X="11.5" Y="0.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AgAAAAAAAABCAAAAAgAAAAGAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>FileManager.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Lab5.Form1" Collapsed="true">
+    <Position X="13.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>BQKBEAwMRGgGiAk0AEiEoBGODCgRAMMogxGBxkBQEDA=</HashCode>
+      <FileName>Form1.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Lab5.MainEditor" Collapsed="true">
+    <Position X="9.75" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AACACAACIAAABEARRFgggAAABADKAECJQAQABAgAAEQ=</HashCode>
+      <FileName>MainEditor.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Lab5.MenuHandler" Collapsed="true">
+    <Position X="11.5" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AQAAAAAAAAAGgAAAQAAAAAAAAQAAEAAAAAAAAAAEAAA=</HashCode>
+      <FileName>MenuHandler.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Lab5.CubeShape" Collapsed="true">
+    <Position X="2.75" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AACAAAAAAAAAIAAAAAAAAAAABAAEAAAAAEAAAAAAEAA=</HashCode>
+      <FileName>Shape\CubeShape.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Lab5.EllipseShape" Collapsed="true">
+    <Position X="0.5" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAABAAAAAAAgACAIwAEAACAAQAAAAAAMAA=</HashCode>
+      <FileName>Shape\EllipseShape.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Lab5.LineOOShape" Collapsed="true">
+    <Position X="5" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAACAAAIAAAAAAAgAAAIAAEAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Shape\LineOOShape.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Lab5.LineShape" Collapsed="true">
+    <Position X="5" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAABAAAAAAAAACAAwAEAACAAUAAAAAAMAA=</HashCode>
+      <FileName>Shape\LineShape.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Lab5.PointShape" Collapsed="true">
+    <Position X="7.25" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAABAAAAAAAAACAAQAEAAAAAABgAAAAMAA=</HashCode>
+      <FileName>Shape\PointShape.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Lab5.RectShape" Collapsed="true">
+    <Position X="2.75" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAABAAAAAAAAACAAwAEAACAAQAAAAAAMAA=</HashCode>
+      <FileName>Shape\RectShape.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Lab5.Shape" Collapsed="true">
+    <Position X="3.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAABAAAAAAAAACAAQAEAAAAAAAAAAAAMAA=</HashCode>
+      <FileName>Shape\Shape.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Font Name="Segoe UI" Size="9" />

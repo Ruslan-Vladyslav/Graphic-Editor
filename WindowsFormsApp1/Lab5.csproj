@@ -52,13 +52,6 @@
     <Compile Include="DialogForm.Designer.cs">
       <DependentUpon>DialogForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Editor\Editor.cs" />
-    <Compile Include="Editor\EllipseEditor.cs" />
-    <Compile Include="Editor\LineOOEditor.cs" />
-    <Compile Include="Editor\CubeEditor.cs" />
-    <Compile Include="Editor\RectEditor.cs" />
-    <Compile Include="Editor\LineEditor.cs" />
-    <Compile Include="Editor\PointEditor.cs" />
     <Compile Include="FileManager.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
@@ -66,6 +59,8 @@
     <Compile Include="Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
+    <Compile Include="Interfaces\EllipseInterface.cs" />
+    <Compile Include="Interfaces\LineInterface.cs" />
     <Compile Include="MenuHandler.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
