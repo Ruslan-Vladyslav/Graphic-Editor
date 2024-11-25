@@ -14,6 +14,24 @@ namespace Lab5
         public FileManager() { }
 
 
+
+        public void CreateFile(string filename)
+        {
+            using (StreamWriter writer = new StreamWriter(filename, false))
+            {
+                int width = 20;
+                int width2 = 10;
+
+                string header = $"{"Object name".PadRight(width)}" +
+                                    $"{"X1".PadRight(width2)}" +
+                                    $"{"Y1".PadRight(width2)}" +
+                                    $"{"X2".PadRight(width2)}" +
+                                    $"{"Y2".PadRight(width2)}";
+
+                writer.WriteLine(header);
+            }
+        }
+
         public void WriteObjFile(string text, long x1, long y1, long x2, long y2, string filename)
         {
             using (StreamWriter writer = new StreamWriter(filename, true))

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms;
 using WindowsFormsApp1;
+using System.IO;
 
 
 namespace Lab5
@@ -77,6 +78,9 @@ namespace Lab5
                 {
                     manager.ClearFile(FILENAME);
                 }
+            } else
+            {
+                manager.CreateFile(FILENAME);
             }
         }
 
@@ -182,7 +186,13 @@ namespace Lab5
                     Owner = this
                 };
 
-                manager.LoadShapesFromFile(DialogAddTable, FILENAME, true, false);
+                if (!File.Exists(FILENAME))
+                {
+                    manager.CreateFile(FILENAME);
+                } else
+                {
+                    manager.LoadShapesFromFile(DialogAddTable, FILENAME, true, false);
+                }
 
                 dialog.FormClosed += Dialog_FormClosed;
                 this.Invalidate();
