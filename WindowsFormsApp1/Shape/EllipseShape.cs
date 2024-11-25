@@ -38,7 +38,7 @@ namespace Lab5
         {
             if (isSolid)
             {
-                using (Brush orangeBrush = new SolidBrush(Color.Orange))
+                using (Brush orangeBrush = new SolidBrush(Color.Yellow))
                 {
                     g.FillEllipse(orangeBrush, (int)x1, (int)y1, (int)(x2 - x1), (int)(y2 - y1));
                 }

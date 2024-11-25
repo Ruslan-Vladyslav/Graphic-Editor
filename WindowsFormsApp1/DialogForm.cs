@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Printing;
 using System.IO;
+using System.Linq;
 using System.Windows.Forms;
 
 
@@ -11,11 +12,18 @@ namespace WindowsFormsApp1
 {
     public partial class DialogForm : Form
     {
+        public event Action<List<int>> RowsDeleted;
+        public event Action<List<int>> RowsChosen;
+
+        public int counter;
+
         public DialogForm()
         {
             InitializeComponent();
             InitializeToolStrip();
             InitializeDataGrid();
+
+            this.TopMost = true;
         }
 
         private void InitializeDataGrid()
@@ -32,6 +40,24 @@ namespace WindowsFormsApp1
             }
 
             dataGrid.ScrollBars = ScrollBars.Vertical;
+            dataGrid.SelectionChanged += DataGrid_SelectionChanged;
+        }
+
+        private void DataGrid_SelectionChanged(object sender, EventArgs e)
+        {
+            if (dataGrid.SelectedRows.Count > 0)
+            {
+                List<int> selectedIndx = dataGrid.SelectedRows
+                    .Cast<DataGridViewRow>()
+                    .Select(row => row.Index)
+                    .ToList();
+
+                RowsChosen?.Invoke(selectedIndx);
+            }
+            else
+            {
+                RowsChosen?.Invoke(new List<int>());
+            }
         }
 
 
@@ -64,7 +90,7 @@ namespace WindowsFormsApp1
 
         public void ClearTable() 
         { 
-            dataGrid.Rows.Clear(); 
+            dataGrid.Rows.Clear();
         }
 
         public void toolBtn1_Click(object sender, EventArgs e)
@@ -151,6 +177,28 @@ namespace WindowsFormsApp1
         private void printToolStripMenuItem_Click(object sender, EventArgs e)
         {
             toolBtn2_Click(sender, e);
+        }
+
+        private void DeleteBtn_Click(object sender, EventArgs e)
+        {
+            if (dataGrid.SelectedRows.Count > 0)
+            {
+                List<int> selectedIndx = dataGrid.SelectedRows
+                    .Cast<DataGridViewRow>()
+                    .Select(row => row.Index + 1)
+                    .ToList();
+
+                foreach (DataGridViewRow row in dataGrid.SelectedRows)
+                {
+                    dataGrid.Rows.Remove(row);
+                }
+
+                RowsDeleted?.Invoke(selectedIndx);
+            }
+            else
+            {
+                MessageBox.Show("No rows selected to delete.", "Information", MessageBoxButtons.OK);
+            }
         }
     }
 }

@@ -42,7 +42,6 @@ namespace Lab5
             }
         }
 
-
         private Shape CreateShape(int objType)
         {
             switch (objType)
@@ -93,9 +92,45 @@ namespace Lab5
             return CreateShape(curShape);
         }
 
-        private Pen CreatePen()
+        public void DeleteShapesByIndices(List<int> indices)
         {
-            Pen dashPen = new Pen(Color.FromArgb(0, 43, 255));
+            indices.Sort((a, b) => b.CompareTo(a));
+
+            foreach (int index in indices)
+            {
+                if (index - 1 >= 0 && index - 1 < shapeList.Count)
+                {
+                    shapeList.RemoveAt(index - 1);
+                }
+            }
+        }
+
+        public void MarkShapes(List<int> indices, Graphics g, bool mainColor)
+        {
+
+            Pen basePen = new Pen(Color.Black);
+            Pen highlightPen = new Pen(Color.Red, 1.5f);
+            bool isSolid = true;
+
+            for (int i = 0; i < shapeList.Count; i++)
+            {
+                if (indices.Contains(i))
+                {
+                    shapeList[i].Show(g, highlightPen, isSolid);
+                }
+                else
+                {
+                    shapeList[i].Show(g, basePen, isSolid);
+                }
+            }
+
+            basePen.Dispose();
+            highlightPen.Dispose();
+        }
+
+        private Pen CreatePen(Color color)
+        {
+            Pen dashPen = new Pen(color);
 
             dashPen.DashStyle = System.Drawing.Drawing2D.DashStyle.Dash;
             dashPen.DashPattern = new float[] { 5, 7 };
@@ -124,7 +159,7 @@ namespace Lab5
 
                 if (mainShape != null)
                 {
-                    using (Pen pen = CreatePen())
+                    using (Pen pen = CreatePen(Color.FromArgb(0, 43, 255)))
                     {
                         mainShape.Set(startPoint.X, startPoint.Y, endPoint.X, endPoint.Y);
                         mainShape.Show(g, pen, isSolid);
@@ -241,7 +276,7 @@ namespace Lab5
 
         public void CreateNewLict(string name, long x1, long y1, long x2, long y2)
         {
-            Shape newShape = CreateShape(name);
+            var newShape = CreateShape(name);
 
             if (newShape != null)
             {

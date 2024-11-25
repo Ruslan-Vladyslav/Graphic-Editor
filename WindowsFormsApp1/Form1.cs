@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
-using System.Runtime.CompilerServices;
 using System.Windows.Forms;
 using WindowsFormsApp1;
 
@@ -16,6 +15,7 @@ namespace Lab5
         private Shape mainShape;
         private readonly System.Drawing.Image mainIMG = null;
         private DialogForm dialog = null;
+        private static List<int> delIndices;
 
         private static string FILENAME = "ShapesData.txt";
         private static int counter = 0;
@@ -34,12 +34,29 @@ namespace Lab5
             this.MouseMove += Form1_MouseMove;
             this.DoubleBuffered = true;
 
-
             manager = new FileManager();
             handler = new MenuHandler(this, edit, mainIMG);
         }
 
 
+        private void RowsDeleted(List<int> indices)
+        {
+            if (indices != null)
+            {
+                edit.DeleteShapesByIndices(indices);
+                manager.RemoveLinesFromFile(FILENAME, indices);
+
+                delIndices = indices;
+
+                foreach (int i in indices)
+                {
+                    counter--;
+                }
+                dialog.label2.Text = counter.ToString();
+
+                this.Invalidate();
+            }
+        }
 
         private void Form1_Shown(object sender, EventArgs e)
         {
@@ -49,7 +66,11 @@ namespace Lab5
 
                 if (MessageBox.Show("Last session data exists. Load last data?", "Information", MessageBoxButtons.OKCancel, MessageBoxIcon.Question) == DialogResult.OK)
                 {
-                    counter = manager.LoadShapesFromFile(DialogAddTable, FILENAME, false);
+                    counter = manager.LoadShapesFromFile(DialogAddTable, FILENAME, false, false);
+                    if (dialog != null)
+                    {
+                        dialog.label2.Text = counter.ToString();
+                    }
                     this.Invalidate();
                 }
                 else
@@ -101,7 +122,7 @@ namespace Lab5
             {
                 edit.GetTableData(out string text, out long x1, out long y1, out long x2, out long y2);
 
-                if (!string.IsNullOrEmpty(text))
+                if (!string.IsNullOrEmpty(text) && counter <= MAXCOUNT)
                 {
                     manager.WriteObjFile(text, x1, y1, x2, y2, FILENAME);
                     counter++;
@@ -109,6 +130,7 @@ namespace Lab5
                     if (dialog != null && counter <= MAXCOUNT)
                     {
                         DialogAddTable(text, x1, y1, x2, y2);
+                        dialog.label2.Text = counter.ToString();
                     }
                 }
             }
@@ -125,6 +147,11 @@ namespace Lab5
             dialog?.ClearTable();
             manager.ClearFile(FILENAME);
             this.Invalidate();
+
+            if (dialog != null)
+            {
+                dialog.label2.Text = "0";
+            }
 
             counter = 0;
         }
@@ -150,11 +177,15 @@ namespace Lab5
             {
                 DialogBtn.Checked = false;
 
-                dialog = new DialogForm();
-                manager.LoadShapesFromFile(DialogAddTable, FILENAME, true);
+                dialog = new DialogForm
+                {
+                    Owner = this
+                };
+
+                manager.LoadShapesFromFile(DialogAddTable, FILENAME, true, false);
 
                 dialog.FormClosed += Dialog_FormClosed;
-
+                this.Invalidate();
                 dialog.toolBtn1_Click(sender, e);
                 dialog = null;
             }
@@ -276,11 +307,16 @@ namespace Lab5
                 DialogBtn.Checked = true;
 
                 dialog = new DialogForm();
-                //dialog.Owner = this;
+                dialog.Owner = this;
 
-                manager.LoadShapesFromFile(DialogAddTable, FILENAME, true);
+                dialog.ClearTable();
+                manager.LoadShapesFromFile(DialogAddTable, FILENAME, true, false);
 
                 dialog.FormClosed += Dialog_FormClosed;
+                dialog.RowsDeleted += RowsDeleted;
+                dialog.RowsChosen += HighlightShapes;
+
+                this.Invalidate();
                 dialog.Show();
             }
             else
@@ -289,15 +325,34 @@ namespace Lab5
             }
         }
 
+        private void HighlightShapes(List<int> indices)
+        {
+            bool mainColor = true;
+
+            if (dialog != null)
+            {
+                using (Graphics g = this.CreateGraphics())
+                {
+                    edit.MarkShapes(indices, g, mainColor);
+                }
+            } else {
+                this.Invalidate();
+            }
+        }
+
         private void Dialog_FormClosed(object sender, FormClosedEventArgs e)
         {
             DialogBtn.Checked = false;
             dialog = null;
+
+            delIndices?.Clear();
+            this.Invalidate();
         }
 
         public void DialogAddTable(string name, long x1, long y1, long x2, long y2)
         {
             dialog.AddShapeToTable(name, x1, y1, x2, y2);
+            dialog.label2.Text = counter.ToString();
         }
 
         private void OpenFileBtn_Click(object sender, EventArgs e)
@@ -331,18 +386,19 @@ namespace Lab5
                 string fileName = openFileDialog.FileName;
 
                 edit.ClearObjects();
-                dialog?.ClearTable();
 
                 manager.CopyFile(fileName, FILENAME);
                 counter = 0;
 
                 if (dialog == null || dialog.IsDisposed)
                 {
-                    counter = manager.LoadShapesFromFile(DialogAddTable, fileName, false);
+                    counter = manager.LoadShapesFromFile(DialogAddTable, fileName, false, false);
                 }
                 else
                 {
-                    counter = manager.LoadShapesFromFile(DialogAddTable, fileName, true);
+                    counter = manager.LoadShapesFromFile(DialogAddTable, fileName, true, true);
+                    dialog.label2.Text = counter.ToString();
+                    
                 }
 
                 this.Invalidate();

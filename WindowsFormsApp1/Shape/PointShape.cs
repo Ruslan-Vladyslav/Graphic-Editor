@@ -26,9 +26,18 @@ namespace Lab5
         {
             const int radius = 2;
 
-            using (Brush brush = new SolidBrush(Color.Black))
+            if (pen.Color == Color.Black)
             {
-                g.FillEllipse(brush, (int)x - radius, (int)y - radius, 2 * radius, 2 * radius);
+                using (Brush brush = new SolidBrush(Color.Black))
+                {
+                    g.FillEllipse(brush, (int)x - radius, (int)y - radius, 2 * radius, 2 * radius);
+                }
+            } else
+            {
+                using (Brush brush = new SolidBrush(Color.Red))
+                {
+                    g.FillEllipse(brush, (int)x - radius, (int)y - radius, 2 * radius, 2 * radius);
+                }
             }
         }
     }

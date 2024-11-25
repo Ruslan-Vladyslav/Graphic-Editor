@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Windows.Forms;
 
 
@@ -29,6 +31,20 @@ namespace Lab5
             }
         }
 
+        public void RemoveLinesFromFile(string filename, List<int> indices)
+        {
+            List<string> allLines = File.ReadAllLines(filename).ToList();
+
+            indices = indices.Where(i => i > 0 && i < allLines.Count).OrderByDescending(i => i).ToList();
+
+            foreach (int index in indices)
+            {
+                allLines.RemoveAt(index);
+            }
+
+            File.WriteAllLines(filename, allLines);
+        }
+
         public void ClearFile(string filename)
         {
             using (StreamWriter writer = new StreamWriter(filename, false))
@@ -46,7 +62,7 @@ namespace Lab5
             }
         }
 
-        public int LoadShapesFromFile(Action<string, long, long, long, long> func, string filename, bool allow)
+        public int LoadShapesFromFile(Action<string, long, long, long, long> func, string filename, bool allow, bool both)
         {
             int counter = 0;
 
@@ -68,13 +84,23 @@ namespace Lab5
                             long.TryParse(parts[3], out long x2) &&
                             long.TryParse(parts[4], out long y2))
                         {
-                            if (allow is true)
+                            if (both)
                             {
                                 func(shape, x1, y1, x2, y2);
+                                editor.CreateNewLict(shape, x1, y1, x2, y2);
+                            } else
+                            {
+                                if (allow is true)
+                                {
+                                    func(shape, x1, y1, x2, y2);
+                                }
+                                else
+                                {
+                                    editor.CreateNewLict(shape, x1, y1, x2, y2);
+                                }
                             }
 
                             counter++;
-                            editor.CreateNewLict(shape, x1, y1, x2, y2);
                         }
                     }
                 }

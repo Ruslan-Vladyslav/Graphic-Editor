@@ -26,7 +26,7 @@ namespace Lab5
 
         public override void Show(Graphics g, Pen pen, bool isSolid)
         {
-            if (isSolid)
+            if (isSolid) 
             {
                 using (Brush grayBrush = new SolidBrush(Color.LightGray))
                 {
