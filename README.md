@@ -34,5 +34,18 @@
 
 1. Clone the repository:
    ```bash
-   git clone 
-
+   git clone https://github.com/Ruslan-Vladyslav/Graphic-Editor.git
+   cd .\Graphic-Editor\
+   ```
+2. Restore dependencie:
+   ```bash
+   dotnet restore
+   ```
+3. Build the project:
+   ```bash
+   dotnet build
+   ```
+4. Run the application:
+   ```bash
+   dotnet run
+   ```
