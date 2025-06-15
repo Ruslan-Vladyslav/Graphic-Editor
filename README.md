@@ -1,33 +1,27 @@
-# Image Processing App
+# Shape Drawing Application
 
-## Project Description
-
-**Image Processing App** is a Windows Forms application built with C#. It allows users to load, edit, and save raster images in BMP format. The program provides a simple and user-friendly interface for adjusting image brightness, contrast, and color components (R, G, B). The project follows an object-oriented design for modularity and easy future expansion.
+This is a Windows Forms application that allows users to draw, view, save, and load geometric shapes.
 
 ## Features
 
-- Load images in BMP format
-- Adjust image parameters:
-  - Brightness
-  - Contrast
-  - Red, Green, Blue channels
-- Save edited images as BMP
-- Real-time preview with GUI
-- Easy-to-use sliders and buttons for editing
-- Designed with scalability and maintainability in mind
+- Draw various shapes:
+  - Point
+  - Line
+  - Line with circles
+  - Rectangle
+  - Ellipse
+  - Cube
+- Select shapes from the menu
+- View a list of all created shapes in a separate dialog window
+- Display shape coordinates
+- Delete selected shapes
+- Save shapes to a file
+- Load shapes from a file
 
-## Technologies Used
-
-| Component           | Technology           |
-|--------------------|----------------------|
-| Language           | C#                   |
-| GUI Framework      | Windows Forms        |
-| Architecture       | Object-Oriented (OOP)|
-| Platform           | .NET Framework / .NET 6+ |
 
 ## Class Diagram (build in Visual Studio 2022)
 
-![image](https://github.com/user-attachments/assets/b0502989-7176-4b08-a9a4-0de7926ab654)
+![image](https://github.com/user-attachments/assets/9b4dc15f-925a-4ff5-9745-f09826ace818)
 
 
 ## How to Run
