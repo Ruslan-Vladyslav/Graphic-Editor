@@ -24,6 +24,11 @@ This is a Windows Forms application that allows users to draw, view, save, and l
 ![image](https://github.com/user-attachments/assets/9b4dc15f-925a-4ff5-9745-f09826ace818)
 
 
+## App Interface
+
+![image](https://github.com/user-attachments/assets/69ca290b-8508-4687-a662-30081634505d)
+
+
 ## How to Run
 
 1. Clone the repository:
